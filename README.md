@@ -2,17 +2,18 @@
 
 ## macaca工具集
 * macaca cli
-> macaca主程序
-* diver
+  > macaca主程序
+* 驱动
   * macaca-ios
   * macaca-android
   * macaca-chrome
   * macaca-electron
 * Inspector
-> 元素查看器
+  > 元素查看器
 * Recorder
-> 录屏工具
+  > 录屏工具
 * Reliable
+  > 集中化平台
 
 ## 环境配置
 ### node
@@ -64,25 +65,61 @@ Connected :9222 to SIMULATOR (SIMULATOR)
 ```shell
 $ brew install libimobiledevice@HEAD
 ```
+### macaca 安装检查
+```shell
+$ macaca doctor
 
+ macaca-doctor version: 1.0.27
+
+
+ Node.js checklist:
+
+ node env: /usr/local/bin/node
+ node version: v4.6.2
+
+ iOS checklist:
+
+ Xcode is installed at: `/Applications/Xcode.app/Contents/Developer`
+ Xcode Command Line Tools is ready, version: 2345.1.
+ iproxy[usbmuxd] is installed at: `/usr/local/bin/iproxy`
+ ios_webkit_debug_proxy is installed at: `/usr/local/bin/ios_webkit_debug_proxy`
+
+ Android checklist:
+
+ JAVA version is `1.8.0_74`
+ JAVA_HOME is set to `/Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home`
+ ANDROID_HOME is set to `/Users/FJC/Documents/android-sdk/android-sdk-macosx`
+ Platforms is set to `/Users/FJC/Documents/android-sdk/android-sdk-macosx/platforms/android-23`
+ Android tools is set to `/Users/FJC/Documents/android-sdk/android-sdk-macosx/tools/android`
+ ADB tool is set to `/Users/FJC/Documents/android-sdk/android-sdk-macosx/platform-tools/adb`
+
+ Installed driver list:
+
+ android: 1.1.3
+ chrome: 1.0.5
+ electron: 1.1.4
+ ios: 1.0.46
+```
 
 ### Inspector
 ```shell
 $ npm i app-inspector -g
 $ app-inspector -u xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
-- ios
+- ios的设备id
 命令 `xcrun simctl list` 或者 打开模拟器，从菜单中打开` Hardware - devices - manage devices `。 然后你会看到模拟器信息界面，里面有个 identifier，就是 UDID。
 ![](./pic/ios_identifier.png)
 http://localhost:5678/
 ![](./pic/inspector.png)
 
-- Android
+- Android设备id
 ```shell
 $ adb devices
 List of devices attached
 9a5c614c	device
 ```
+
+浏览器打开`http://localhost:5678/`
 
 
 ### Recorder
@@ -390,3 +427,25 @@ $ mvn test
 js: [API](https://macacajs.github.io/macaca-wd/),用的是macaca-wd这个驱动
 
 但是录屏生成的脚本用的驱动是[JWebDriver](https://github.com/yaniswang/jWebDriver)，两者不一致，api也有不同.
+
+
+
+## 文献
+
+[macaca官网](https://macacajs.github.io/environment-setup)
+
+[nodejs API](https://macacajs.github.io/macaca-wd/)
+
+[java API](https://macacajs.github.io/wd.java/)
+
+[Python API](https://macacajs.github.io/wd.py/)
+
+[macaca作者xdf](https://testerhome.com/xdf)
+
+[用 Docker 做自动化持续集成 - Macaca 部署完整版](https://testerhome.com/topics/4579)
+
+[macaca持续集成框架CI安装master与slave环境配置](https://codetosurvive1.github.io/posts/macaca-master-slave.html)
+
+[基于 Node.js 的自动化测试 Macaca - 使用 Macaca 录制器录制脚本](https://testerhome.com/topics/6222)
+
+[基于 Node.js 的自动化测试-Macaca - 测试 Android 应用](https://testerhome.com/topics/4442)
