@@ -39,12 +39,12 @@ $ npm i  macaca-electron -g
 
 ### iOS
 需要安装ios usb驱动
-```
+```shell
 $ brew install usbmuxd
 $ brew install ios-webkit-debug-proxy
 ```
 安装成功的话
-```
+```shell
 $ ios_webkit_debug_proxy
 
 Listing devices on :9221
@@ -61,15 +61,14 @@ Connected :9222 to SIMULATOR (SIMULATOR)
 如果连接不上：
 - ios-webkit-debug-proxy版本问题。先homebrew更新，ios-webkit-debug-proxy安装最新的
 - 删除libimobiledevice，用head装
-```
-brew install libimobiledevice@HEAD
+```shell
+$ brew install libimobiledevice@HEAD
 ```
 
 
 ### Inspector
-```
+```shell
 $ npm i app-inspector -g
-
 $ app-inspector -u xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 - ios
@@ -79,7 +78,7 @@ http://localhost:5678/
 ![](./pic/inspector.png)
 
 - Android
-```
+```shell
 $ adb devices
 List of devices attached
 9a5c614c	device
@@ -88,49 +87,59 @@ List of devices attached
 
 ### Recorder
 安装
-```
+```shell
 $ npm install uirecorder mocha -g
 ```
 #### PC
 - 初始化
-```
+```shell
 $ uirecorder init
 $ npm install
 ```
 - 录制脚本
-```
+```shell
 $ uirecorder start sample/test.spec.js
 ```
 会有两个浏览器打开，一个是录制浏览器，一个是校验浏览器
+
 ![](./pic/inspector_pc1.png)
+
 输入百度网址测试
+
 ![](./pic/inspector_pc2.png)
+
 边上有这个出现，表示校验浏览器也同时进行了这一操作的校验并成功
+
 ![](./pic/inspector_pc3.png)
+
 工具栏
+
 ![](./pic/inspector_pc4.png)
+
 插入断言
+
 ![](./pic/inspector_pc5.png)
+
 - 运行
-```
+```shell
 $ source run.sh ( Linux|Mac )
 $ run.bat ( Windows )
 ```
 
 #### mobile
 - 初始化
-```
+```shell
 $ macaca server --port 4444
 $ uirecorder init --mobile
 $ npm install
 ```
 - 录制脚本
-```
+```shell
 $ uirecorder start --mobile sample/test.spec.js
 ```
 
 - 运行
-```
+```shell
 $ source run.sh ( Linux|Mac )
 $ run.bat ( Windows )
 ```
@@ -138,11 +147,8 @@ $ run.bat ( Windows )
 查看用例报告
 ```
 ./reports/index.html
-
 ./reports/index.xml (JUnit)
-
 ./reports/index.json
-
 ./screenshots/
 ```
 
@@ -151,26 +157,26 @@ $ run.bat ( Windows )
 
 ### Reliable
 
-> 集中化测试平台,master-slave结构
+集中化测试平台,master-slave结构
 * git >= 2.0
 * docker >= 1.9.1
 * docker compose >= 1.5.2
 
 #### Master
 1. 构建reliable-docker-base镜像
-```
+```shell
 $ git clone https://github.com/reliablejs/reliable-docker-base --depth=1
 $ cd reliable-docker-base
 $ docker build -t="reliable-docker-base" .
 ```
 2. 构建reliable-master镜像
-```
+```shell
 $ git clone https://github.com/reliablejs/reliable-master --depth=1
 $ cd reliable-master
 $ docker build -t="reliable-master" .
 ```
 3. 运行compose
-```
+```shell
 $ git clone https://github.com/reliablejs/reliable-macaca-docker-compose.git --depth=1
 $ cd reliable-macaca-docker-compose
 $ make start
@@ -221,14 +227,14 @@ redis:
 #   volumes:
 #     - /etc/localtime:/etc/localtime:ro
 #   command: /reliable-macaca-slave/bin/reliable-macaca-slave server -m reliable-master:8083 --verbose
-
 ```
 
 原本文件最后的slave节点也是用docker部署，从网络获取镜像，但实际操作获取不到，因此这里注释掉，docker只部署master节点及其依赖的mongodb和redis。
 
 4. 创建用户
 在Reliable-master容器里面执行`make adduser`， 选为 admin，才能在有删除任务的权限。
-```
+
+```shell
 $ make adduser
 
 ./bin/reliable-master adduser
@@ -246,110 +252,122 @@ Do you want create an account? [Y/N]y
  Add user success!
 
  Goodbye! Have a great day!
-
-
 ```
 
 #### slave
+
 1. 安装
-```
+
+```shell
 $ brew install pkg-config
 $ brew install zeromq
 $ npm install reliable-macaca-slave -g
 ```
+
 如果要自己构建镜像
-```
+
+```shell
 $ git clone https://github.com/reliablejs/reliable-macaca-slave.git
 $ cd reliable-macaca-slave
 $ docker build -f Dockerfile .
 ```
+
 2. 连接master
-```
+
+```shell
 $ reliable server -m <reliable-master:port> --verbose
 ```
 #### reliable使用
+
 ![](./pic/reliable1.png)
+
 ![](./pic/reliable2.png)
+*目前iOS Safari的测试官方还不支持*
+![](./pic/reliable3.png)
 
 
 ## 测试用例
-macaca提供了java、js、python的api，以java为例。
+
+macaca提供了java、nodejs、python的api，以java为例。
+
 ### Java
 java用maven构建项目
 setting.xml:
 ```
-<settings
-	xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd'
-	xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
-	<profiles>
-		<profile>
-			<repositories>
-				<repository>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-					<id>central</id>
-					<name>bintray</name>
-					<url>http://jcenter.bintray.com</url>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-					<id>central</id>
-					<name>bintray-plugins</name>
-					<url>http://jcenter.bintray.com</url>
-				</pluginRepository>
-			</pluginRepositories>
-			<id>bintray</id>
-		</profile>
-	</profiles>
-	<activeProfiles>
-		<activeProfile>bintray</activeProfile>
-	</activeProfiles>
-</settings>
+      <settings
+      	xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd'
+      	xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+      	<profiles>
+      		<profile>
+      			<repositories>
+      				<repository>
+      					<snapshots>
+      						<enabled>false</enabled>
+      					</snapshots>
+      					<id>central</id>
+      					<name>bintray</name>
+      					<url>http://jcenter.bintray.com</url>
+      				</repository>
+      			</repositories>
+      			<pluginRepositories>
+      				<pluginRepository>
+      					<snapshots>
+      						<enabled>false</enabled>
+      					</snapshots>
+      					<id>central</id>
+      					<name>bintray-plugins</name>
+      					<url>http://jcenter.bintray.com</url>
+      				</pluginRepository>
+      			</pluginRepositories>
+      			<id>bintray</id>
+      		</profile>
+      	</profiles>
+      	<activeProfiles>
+      		<activeProfile>bintray</activeProfile>
+      	</activeProfiles>
+      </settings>
 ```
+
 pom.xml:
 ```
-...
-<dependencies>
-   <dependency>
-     <groupId>macaca.webdriver.client</groupId>
-     <artifactId>macacaclient</artifactId>
-     <version>1.0.3</version>
-   </dependency>
-   <dependency>
-     <groupId>com.alibaba</groupId>
-     <artifactId>fastjson</artifactId>
-     <version>1.2.15</version>
-   </dependency>
-   <dependency>
-     <groupId>org.apache.httpcomponents</groupId>
-     <artifactId>httpclient</artifactId>
-     <version>4.5.2</version>
-   </dependency>
-   <dependency>
-     <groupId>log4j</groupId>
-     <artifactId>log4j</artifactId>
-     <version>1.2.17</version>
-   </dependency>
-   <dependency>
-     <groupId>junit</groupId>
-     <artifactId>junit</artifactId>
-     <version>4.12</version>
-     <scope>test</scope>
-   </dependency>
-   <dependency>
-     <groupId>org.hamcrest</groupId>
-     <artifactId>hamcrest-library</artifactId>
-     <version>1.2</version>
-     <scope>test</scope>
-   </dependency>
- </dependencies>
- ...
+        ...
+        <dependencies>
+           <dependency>
+             <groupId>macaca.webdriver.client</groupId>
+             <artifactId>macacaclient</artifactId>
+             <version>1.0.3</version>
+           </dependency>
+           <dependency>
+             <groupId>com.alibaba</groupId>
+             <artifactId>fastjson</artifactId>
+             <version>1.2.15</version>
+           </dependency>
+           <dependency>
+             <groupId>org.apache.httpcomponents</groupId>
+             <artifactId>httpclient</artifactId>
+             <version>4.5.2</version>
+           </dependency>
+           <dependency>
+             <groupId>log4j</groupId>
+             <artifactId>log4j</artifactId>
+             <version>1.2.17</version>
+           </dependency>
+           <dependency>
+             <groupId>junit</groupId>
+             <artifactId>junit</artifactId>
+             <version>4.12</version>
+             <scope>test</scope>
+           </dependency>
+           <dependency>
+             <groupId>org.hamcrest</groupId>
+             <artifactId>hamcrest-library</artifactId>
+             <version>1.2</version>
+             <scope>test</scope>
+           </dependency>
+         </dependencies>
+         ...
 ```
+
 构建项目,安装依赖
 ```
 $ mvn -s settings.xml clean install
@@ -365,3 +383,8 @@ $ macaca server --verbose
 ```
 $ mvn test
 ```
+
+### Node.js
+js: [API](https://macacajs.github.io/macaca-wd/),用的是macaca-wd这个驱动
+
+但是录屏生成的脚本用的驱动是[JWebDriver](https://github.com/yaniswang/jWebDriver)，两者不一致，api也有不同.

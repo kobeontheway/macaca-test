@@ -49,32 +49,10 @@ public class AndroidTest {
 		String courseFile = directory.getCanonicalPath();
 
 		System.out.println("------------#1 update test-------------------");
-//		boolean isUpdate = driver.isElementExist(
-//				"//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[1]",
-//				"//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[1]");
-//		if (isUpdate) {
-//			driver.elementByXPath(
-//					"//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[1]")
-//			.click();
-//			
-//		}
-//		driver.elementById("cancel_button").click().sleep(1000);
-//		
 		driver.elementByXPath("//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[1]").click().sleep(1000);
 		
 		System.out.println("------------#2 permission test-------------------");
-//		
-//		 isUpdate = driver.isElementExist(
-//				"//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[1]",
-//				"//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[1]");
-//		if (isUpdate) {
-//			driver.elementByXPath(
-//					"//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[1]")
-//			.click();
-//			
-//		}
 		driver.elementByXPath("//android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[1]").click().sleep(1000);
-//		driver.elementById("cancel_button").click().sleep(1000);
 
 		System.out.println("------------#3 login test-------------------");
 
@@ -84,8 +62,6 @@ public class AndroidTest {
 		driver.elementByXPath("//android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.ScrollView[1]/android.widget.LinearLayout[1]/android.widget.LinearLayout[2]/android.widget.EditText[1]")
 				.sendKeys("820521");
 		
-//		driver.elementById("et_email_phone").sendKeys("13874979696");
-//		driver.elementById("password").sendKeys("820521");
 		driver.elementById("com.asiainfo.CMCHN:id/btn_login").click().sleep(1000);
 		
 		
