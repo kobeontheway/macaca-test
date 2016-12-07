@@ -260,23 +260,21 @@ Do you want create an account? [Y/N]y
 
 #### slave
 
-1. 安装
+##### 安装
 
 ```shell
 $ brew install pkg-config
 $ brew install zeromq
 $ npm install reliable-macaca-slave -g
 ```
-
 如果要自己构建镜像
-
 ```shell
 $ git clone https://github.com/reliablejs/reliable-macaca-slave.git
 $ cd reliable-macaca-slave
 $ docker build -f Dockerfile .
 ```
 
-2. 连接master
+##### 连接master
 
 ```shell
 $ reliable server -m <reliable-master:port> --verbose
