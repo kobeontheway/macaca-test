@@ -66,6 +66,7 @@ Connected :9222 to SIMULATOR (SIMULATOR)
 $ brew install libimobiledevice@HEAD
 ```
 ### macaca 安装检查
+
 ```shell
 $ macaca doctor
 
