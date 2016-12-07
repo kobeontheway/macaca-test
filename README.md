@@ -176,17 +176,17 @@ $ cd reliable-master
 $ docker build -t="reliable-master" .
 ```
 3. 运行compose
-```shell
+```
 $ git clone https://github.com/reliablejs/reliable-macaca-docker-compose.git --depth=1
 $ cd reliable-macaca-docker-compose
 $ make start
 ```
-make start 通过docker-compose将 reliable-master、 mongodb、redis三个image组合使用，组合使用的配置在reliable-macaca-docker-compose的docker-compose.yml配置文件中。
 master默认端口是8080，在makefile中修改。
 
+make start 通过docker-compose将 reliable-master、 mongodb、redis三个image组合使用，组合使用的配置在reliable-macaca-docker-compose的docker-compose.yml配置文件中。
+
+
 ```
-# docker-compose.yml
-reliable-master:
   container_name: "reliable-master"
   restart: "UNLESS-STOP"
   image: reliable-master
@@ -231,7 +231,8 @@ redis:
 
 原本文件最后的slave节点也是用docker部署，从网络获取镜像，但实际操作获取不到，因此这里注释掉，docker只部署master节点及其依赖的mongodb和redis。
 
-4. 创建用户
+#### 创建用户
+
 在Reliable-master容器里面执行`make adduser`， 选为 admin，才能在有删除任务的权限。
 
 ```shell
