@@ -164,19 +164,22 @@ $ run.bat ( Windows )
 
 #### Master
 1. 构建reliable-docker-base镜像
+
 ```shell
 $ git clone https://github.com/reliablejs/reliable-docker-base --depth=1
 $ cd reliable-docker-base
 $ docker build -t="reliable-docker-base" .
 ```
 2. 构建reliable-master镜像
+
 ```shell
 $ git clone https://github.com/reliablejs/reliable-master --depth=1
 $ cd reliable-master
 $ docker build -t="reliable-master" .
 ```
 3. 运行compose
-```
+
+```shell
 $ git clone https://github.com/reliablejs/reliable-macaca-docker-compose.git --depth=1
 $ cd reliable-macaca-docker-compose
 $ make start
